@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <router-view/>
     <FooterGuide/>
   </div>
@@ -17,5 +17,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  #app
+    width 100%
+    height 100%
 </style>
