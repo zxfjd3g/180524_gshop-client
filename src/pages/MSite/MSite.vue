@@ -56,14 +56,7 @@
       // 异步获取商品分类列表
       this.$store.dispatch('getCategorys')
 
-      // 初始化列表显示之后执行
-      new Swiper('.swiper-container', {
-        loop: true, // 循环模式
-        // 如果需要分页器
-        pagination: {
-          el: '.swiper-pagination',
-        },
-      })
+
     },
 
     computed: {
@@ -93,6 +86,35 @@
         })
 
         return arr
+      }
+    },
+
+    watch: {
+      // 注意: 状态数据变化后, 更新对应的界面是异步进行的
+      categorys (value) { // categorys状态数据更新了立即
+
+        /*setTimeout(() => {
+          // 初始化列表显示之后执行
+          new Swiper('.swiper-container', {
+            loop: true, // 循环模式
+            // 如果需要分页器
+            pagination: {
+              el: '.swiper-pagination',
+            },
+          })
+        }, 200)*/
+
+        // 必须在状态数据更新之后执行
+        this.$nextTick(() => { // 回调函数在界面更新之后立即执行
+          // 初始化列表显示之后执行
+          new Swiper('.swiper-container', {
+            loop: true, // 循环模式
+            // 如果需要分页器
+            pagination: {
+              el: '.swiper-pagination',
+            },
+          })
+        })
       }
     },
 
