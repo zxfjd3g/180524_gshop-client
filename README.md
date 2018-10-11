@@ -18,10 +18,10 @@
         $route: 当前路由对象, 一些当前路由信息数据的容器, path/meta/query/params
     项目路由拆分
     底部导航组件: FooterGuide
-    导航路由组件: Msite/Search/Order/Profile
+    导航路由组件: MSite/Search/Order/Profile
 
 ## 4. 抽取组件
-    头部组件: HeaderTop, 通过slot来实现组件通信标签结构
+    头部组件: TopHeader, 通过slot来实现组件通信标签结构
     商家列表组件: ShopList
     
 ## 5. 登陆路由组件
@@ -32,7 +32,7 @@
     运行后台项目(启动mongodb服务), 
     使用postman测试后台接口, 如果不一致, 修改接口文档
 	封装ajax: 
-		promise+axios封装ajax请求的函数
+		Promise+axios封装ajax请求的函数
 		封装每个接口对应的请求函数(能根据接口定义ajax请求函数)
 		解决ajax的跨越域问题: 配置代理, 对代理的理解
 
