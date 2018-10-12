@@ -6,6 +6,7 @@ import store from './store'
 import TopHeader from './components/TopHeader/TopHeader.vue'
 
 import 'swiper/dist/css/swiper.min.css'
+import './mock/mockServer'
 
 
 // 注册全局组件
