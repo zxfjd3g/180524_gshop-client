@@ -70,3 +70,15 @@
     2). 手机号验证: right_phone + isRightPhone计算属性
     3). 倒计时效果: computeTime + setInterval()
     4). 密码显示/隐藏的切换: isShowPwd + transition
+    
+# day03
+
+## 1. Star组件
+
+## 2. 登陆/注册前后台交互功能
+    1). 图形验证码
+    发送验证短信
+    短信登陆
+    密码登陆
+    自动登陆
+    退出登陆
