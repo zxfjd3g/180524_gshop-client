@@ -150,11 +150,12 @@
         // 更新验证码
         this.updateCaptcha()
 
+        debugger
         // 根据请求的结果进行相应处理
         if(result.code===0) { // 成功
           const user = result.data
           // 将user保存到state
-          this.$store.dispatch('saveUser')
+          this.$store.dispatch('saveUser', user)
           // 跳转到个人中心界面
           this.$router.replace('/profile')
         } else { // 失败
