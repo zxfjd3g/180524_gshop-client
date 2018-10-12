@@ -54,3 +54,19 @@
         在mounted()通过$store.dispatch('actionName')来异步获取后台数据到state中
         mapState(['xxx'])读取state中数据到组件中
         在模板中显示xxx的数据
+        
+# day02
+## 1. 异步显示分类轮播
+    通过vuex获取categorys数组(发请求, 读取)
+    对数据进行整合计算(一维变为特定的二维数组)
+    使用Swiper显示轮播, 如何在界面更新之后创建Swiper对象?
+        1). 使用watch+$nextTick()
+        2). 使用回调+$nextTick()	
+    使用svg图片实现loading的效果  
+    
+## 2. 登陆/注册功能
+### 1. 界面效果
+    1). 切换登陆方式: loginWay
+    2). 手机号验证: right_phone + isRightPhone计算属性
+    3). 倒计时效果: computeTime + setInterval()
+    4). 密码显示/隐藏的切换: isShowPwd + transition
