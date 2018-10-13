@@ -4,7 +4,8 @@
       <div class="menu-wrapper">
         <ul>
           <!--current-->
-          <li class="menu-item" v-for="(good, index) in goods" :key="index" :class="{current: index===0}">
+          <li class="menu-item" v-for="(good, index) in goods" :key="index"
+              :class="{current: index===currentIndex}">
             <span class="text bottom-border-1px">
               <img class="icon" :src="good.icon" v-if="good.icon">
               {{good.name}}
@@ -13,7 +14,7 @@
         </ul>
       </div>
       <div class="foods-wrapper">
-        <ul>
+        <ul ref="foodsUl">
           <li class="food-list-hook" v-for="(good, index) in goods" :key="index">
             <h1 class="title">{{good.name}}</h1>
             <ul>
@@ -48,23 +49,83 @@
   import {mapState} from 'vuex'
   export default {
     data() {
-      return {}
+      return {
+        scrollY: 0, // 右侧列表Y轴方向滑动的坐标
+        tops: [], // 右侧分类li的top值组成的数据
+      }
     },
 
     computed: {
-      ...mapState(['goods'])
+      ...mapState(['goods']),
+
+      // 当前分类的下标
+      currentIndex () {
+        const {scrollY, tops} = this
+
+        // scrollY大于或等于当前top && 小于下一个top
+        return tops.findIndex((top, index) => scrollY>=top && scrollY<tops[index+1])
+
+      }
     },
 
     mounted() {
-      this.$store.dispatch('getGoods', () => { // 状态数据变化化
+      this.$store.dispatch('getGoods', () => { // 状态数据变化了
         this.$nextTick(() => { // 列表界面更新显示后执行
-          // 左侧列表滚动对象
-          new BScroll('.menu-wrapper', {})
-          // 右侧列表滚动对象
-          new BScroll('.foods-wrapper', {})
+
+          // 初始化滚动对象
+          this._initScroll()
+          // 初始化tops数据
+          this._initTops()
+
         })
       })
+    },
 
+    methods: {
+      _initScroll () {
+        // 左侧列表滚动对象
+        new BScroll('.menu-wrapper', {
+          click: true // 会派发点击事件
+        })
+        // 右侧列表滚动对象
+        const rightScroll = new BScroll('.foods-wrapper', {
+          click: true,
+          probeType: 1  // 非实时回调, 非触摸滑动不会回调
+        })
+
+        // 绑定scroll的监听
+        rightScroll.on('scroll', ({x, y}) => {
+          console.log('scroll', x, y)
+
+          // 更新scrollY
+          this.scrollY = Math.abs(y)
+        })
+
+        // 绑定scrollEnd的监听
+        rightScroll.on('scrollEnd', ({x, y}) => {
+          console.log('scrollEnd', x, y)
+
+          // 更新scrollY
+          this.scrollY = Math.abs(y)
+        })
+
+      },
+
+      _initTops () {
+        const tops = []
+        let top = 0
+        tops.push(top)
+        // 得到所有分类li的伪数组
+        const lis = this.$refs.foodsUl.querySelectorAll('.food-list-hook')
+        lis.forEach(li => {
+          top += li.clientHeight
+          tops.push(top)
+        })
+
+        // 更新状态
+        this.tops = tops
+        console.log('tops=', tops)
+      }
     }
   }
 </script>
