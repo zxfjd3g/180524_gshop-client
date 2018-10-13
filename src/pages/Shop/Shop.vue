@@ -20,13 +20,11 @@
 <script>
   import ShopHeader from '../../components/ShopHeader/ShopHeader.vue'
   
-  import {reqInfo} from '../../api'
 
   export default {
     
-    async mounted () {
-      const result = await reqInfo()
-      console.log('shop', result)
+    mounted () {
+      this.$store.dispatch('getInfo')
     },
     
     

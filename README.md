@@ -71,6 +71,7 @@
     3). 倒计时效果: computeTime + setInterval()
     4). 密码显示/隐藏的切换: isShowPwd + transition
     
+    
 # day03
 
 ## 1. Star组件
@@ -102,8 +103,10 @@
 ## 3. 搭建商家整体界面结构
     1). 拆分界面路由
     2). 路由的定义/配置|使用
-## 4. mock数据
+    
+## 4. mock数据/接口
     1). 前后台分离的理解
     2). json数据设计的理解  
     3). mockjs的理解和使用
     
+# day04
