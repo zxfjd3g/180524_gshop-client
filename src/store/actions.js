@@ -84,11 +84,13 @@ export default {
   },
 
   // 异步获取goods数据
-  async getGoods ({commit}) {
+  async getGoods ({commit}, cb) {
     const result = await reqGoods()
     if(result.code===0) {
       const goods = result.data
       commit(RECEIVE_GOODS, {goods})
+      // 在更新状态后立即调用
+      typeof cb ==='function' && cb()
     }
   },
 
