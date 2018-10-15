@@ -19,10 +19,10 @@
         </div>
       </div>
       <transition name="move">
-        <div class="shopcart-list" v-show="isShow">
+        <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
             <h1 class="title">购物车</h1>
-            <span class="empty">清空</span>
+            <span class="empty" @click="clearCart">清空</span>
           </div>
           <div class="list-content">
             <ul>
@@ -40,12 +40,13 @@
 
     </div>
     <transition name="fade">
-      <div class="list-mask" v-show="isShow" @click="toggleShow"></div>
+      <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
     </transition>
 
   </div>
 </template>
 <script>
+  import BScroll from 'better-scroll'
   import {mapState, mapGetters} from 'vuex'
   export default {
 
@@ -73,12 +74,48 @@
         } else {
           return '去结算'
         }
+      },
+      listShow () {
+        console.log('listShow()')
+        // 如果总数量为0, 直接返回false
+        if(this.totalCount===0) {
+          // 设置isShow为false
+          this.isShow = false
+          return false
+        }
+
+        if(this.isShow) { // 列表即将要显示
+          this.$nextTick(() => {
+            // 只创建一个scroll对象: 单例对象
+            /*
+            1. 创建前: 判断不存在才去创建对象
+            2. 创建后: 保存对象
+             */
+            if(!this.scroll) {
+              this.scroll = new BScroll('.list-content', {
+                click: true
+              })
+            } else {
+              // 通知scroll对象更新(刷新)
+              this.scroll.refresh()
+            }
+          })
+        }
+
+        return this.isShow
       }
     },
 
     methods: {
       toggleShow () {
-        this.isShow = !this.isShow
+        // 只有购物车有数量时才做
+        if(this.totalCount) {
+          this.isShow = !this.isShow
+        }
+      },
+
+      clearCart () {
+        this.$store.dispatch('clearCart')
       }
     }
   }
