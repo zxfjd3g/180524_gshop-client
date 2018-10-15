@@ -156,3 +156,11 @@
         3). 立即更新scrollY
     5). 问题: 如何保证当前分类可见?
         在currentIndex变化时, 使左侧列表滑动到对应的li
+        
+# day05
+
+## 1. CartControl组件
+## 2. Food组件
+## 3. ShopCart组件
+## 4. ShopRatings组件
+## 5. ShopInfo组件
