@@ -163,7 +163,24 @@
         }
 
       }
-    }
+    },
+
+    // 在进入当前组件前自动调用
+    beforeRouteEnter (to, from, next) {
+      // 在当前组件对象被创建前调用, 不能直接访问this(不是组件对象)
+      console.log('beforeRouteEnter', this)
+
+      next((component) => { // 回调函数在组件对象被创建后自动调用, 它会将组件对象传入函数
+        // 如果已经登陆, 自动跳转到/profile
+        if(component.$store.state.user._id) {
+          next('/profile')
+        } else { // 放行
+          next()
+        }
+      })
+
+
+    },
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
