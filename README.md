@@ -185,8 +185,11 @@
             解决: 只创建一个scroll对象(单例对象)
                 1). 创建之前, 判断对象不存在
                 2). 创建之后, 保存对象
-        e. 打开时, 可能没有滚动
+        e. 打开时, 可能不能滚动
              scroll.refresh()
 
-## 4. ShopRatings组件
-## 5. ShopInfo组件
+# day06
+## 1. ShopRatings组件
+## 2. ShopInfo组件
+## 3. 项目优化
+## 4. 路由导航卫士
