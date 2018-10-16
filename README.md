@@ -177,8 +177,8 @@
       count增加为1: 将food添加到cartFoods中
       count减少为0, 将food从cartFoods中删除
     2). 解决几个功能性bug
-        a. 删除所有购物项, 购物车列表还打开着: 显示条件-->listShow----isShow/cartFoodCount
-        b. 添加一个购物项, 购物车列表自动打开: 当cartFoodCount为0, 设置isShow=false
+        a. 删除所有购物项, 购物车列表还打开着: 显示条件-->listShow----isShow/totalCount
+        b. 添加一个购物项, 购物车列表自动打开: 当totalCount为0, 设置isShow=false
         c. 购物车列表不能滑动: 创建BScroll对象
         d. 购物车列表中点一次添加, 会增加多次
             原因: 同一个列表, 创建了多个scroll对象
@@ -187,7 +187,9 @@
                 2). 创建之后, 保存对象
         e. 打开时, 可能不能滚动
              scroll.refresh()
-
+        f. 关闭后再打开不能再滑动了:
+            使用了v-if, 必须使用v-show
+            
 # day06
 ## 1. ShopRatings组件
 ## 2. ShopInfo组件

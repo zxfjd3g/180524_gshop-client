@@ -98,20 +98,24 @@ export default {
   },
 
   // 异步获取ratings数据
-  async getRatings ({commit}) {
+  async getRatings ({commit}, cb) {
     const result = await reqRatings()
     if(result.code===0) {
       const ratings = result.data
       commit(RECEIVE_RATINGS, {ratings})
+      // 在更新状态后立即调用
+      typeof cb ==='function' && cb()
     }
   },
 
   // 异步获取info数据
-  async getInfo ({commit}) {
+  async getInfo ({commit}, cb) {
     const result = await reqInfo()
     if(result.code===0) {
       const info = result.data
       commit(RECEIVE_INFO, {info})
+      // 在更新状态后立即调用
+      typeof cb ==='function' && cb()
     }
   },
 
